@@ -1,0 +1,32 @@
+[user]
+	name = Jørgen Høhling Blakey
+	email = 53434466+HeadCookie@users.noreply.github.com
+	signingkey = C1129C97527B4F3F
+[core]
+	editor = nvim
+	excludesfile = /Users/jorgenjensen/.gitignore
+  hooksPath = /Users/jorgenjensen/.config/git/hooks
+	autocrlf = false
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[maintenance]
+	repo = /Volumes/projects/signing-service
+	repo = /Volumes/projects/cla
+	repo = /Volumes/projects/api-sign
+	repo = /Volumes/projects/cs-tool
+	repo = /Users/jorgenjensen/.config/nvim
+	repo = /Volumes/projects/ops-penneo-iac
+	repo = /Volumes/projects/fe-webapp
+	repo = /Volumes/Projects/api-media
+	repo = /Volumes/Projects/api-sign
+	repo = /Volumes/Projects/ops-penneo-iac
+[rerere]
+	enabled = true
+[rebase]
+	updateRefs = true
+  autoStash = true

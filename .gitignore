@@ -1,0 +1,8 @@
+.config/btop/btop.log
+.config/karabiner/automatic_backups
+.config/thefuck/__pycache__
+.config/thefuck/settings.py
+.config/jgit/config
+.config/github-copilot
+.cargo/bin
+.config/nvim-lazyvim
