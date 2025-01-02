@@ -1,0 +1,4 @@
+theme = catppuccin-mocha
+font-family = "BlexMono Nerd Font Mono"
+font-thicken = true
+window-decoration = false
