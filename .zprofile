@@ -4,9 +4,13 @@ else
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-if [ -s "$HOME/.nvm/nvm.sh" ]; then
-    . "$HOME/.nvm/nvm.sh" # This loads nvm
-fi
+# NVM setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+
+# Ensure the default Node version is used
+nvm use default
 
 # Add .NET Core SDK tools
 export PATH="$PATH:/Users/jorgenjensen/.dotnet/tools"
