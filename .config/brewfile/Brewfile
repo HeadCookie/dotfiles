@@ -276,7 +276,9 @@ brew xvid
 brew xxhash
 brew xz
 brew yarn
+brew z3
 brew zeromq
+brew zig
 brew zimg
 brew zlib
 brew zoxide
