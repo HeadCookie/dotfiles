@@ -52,6 +52,21 @@ shift + lalt - 3 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]
 shift + lalt - 4 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[4] ]] \
                   && yabai -m window --space $SPACES[4]
 
+shift + lalt - 5 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[5] ]] \
+                  && yabai -m window --space $SPACES[5]
+
+shift + lalt - 6 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[6] ]] \
+                  && yabai -m window --space $SPACES[6]
+
+shift + lalt - 7 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[7] ]] \
+                  && yabai -m window --space $SPACES[7]
+
+shift + lalt - 8 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[8] ]] \
+                  && yabai -m window --space $SPACES[8]
+
+shift + lalt - 9 : SPACES=($(yabai -m query --displays --display | jq '.spaces[]')) && [[ -n $SPACES[9] ]] \
+                  && yabai -m window --space $SPACES[9]
+
 shift + lalt - p : yabai -m window --space prev && yabai -m space --focus prev
 shift + lalt - n : yabai -m window --space next && yabai -m space --focus next
 
