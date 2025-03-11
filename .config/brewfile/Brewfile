@@ -31,6 +31,7 @@ brew cryptography
 brew curl
 brew dav1d
 brew direnv
+brew dive
 brew docker-compose
 brew double-conversion
 brew duf
@@ -121,6 +122,7 @@ brew libheif
 brew libidn
 brew libidn2
 brew libksba
+brew liblinear
 brew liblqr
 brew libmicrohttpd
 brew libnghttp2
@@ -183,6 +185,7 @@ brew neofetch
 brew neovim
 brew net-snmp
 brew nettle
+brew nmap
 brew nnn
 brew nowplaying-cli
 brew npth
@@ -197,6 +200,7 @@ brew openexr
 brew openjdk
 brew openjdk@11
 brew openjdk@17
+brew openjdk@21
 brew openjpeg
 brew openldap
 brew openssl@1.1
@@ -217,6 +221,8 @@ brew pinentry-mac
 brew pixman
 brew pnpm
 brew poppler
+brew postgresql@14
+brew postgresql@15
 brew protobuf
 brew pycparser
 brew pyenv
@@ -244,6 +250,7 @@ brew srt
 brew stow
 brew svt-av1
 brew switchaudio-osx
+brew symfony-cli
 brew tcl-tk
 brew tcl-tk@8
 brew telnet
@@ -303,7 +310,9 @@ cask font-sf-mono
 cask font-sf-pro
 cask iterm2
 cask keepingyouawake
+cask keycastr
 cask maccy
+cask mockoon
 cask neovide
 cask powershell
 cask sf-symbols
@@ -338,7 +347,6 @@ tap rcmdnk/file
 brew brew-file
 
 tap symfony-cli/tap
-brew symfony-cli
 
 # Other Homebrew packages
 brew icu4c
