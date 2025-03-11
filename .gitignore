@@ -7,3 +7,4 @@
 .cargo/bin
 .config/nvim-lazyvim
 .config/yarn/link
+.cargo
