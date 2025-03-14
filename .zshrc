@@ -114,6 +114,7 @@ export PATH="$HOME/bin:$PATH"
 export PATH=$PATH:/Users/jorgenjensen/Library/Python/3.9/bin
 export NVM_LAZY=1
 
+export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
 export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 export PATH=$PATH:/opt/homebrew/Cellar/pcre2/10.42/include

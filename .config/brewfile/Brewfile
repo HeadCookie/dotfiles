@@ -25,6 +25,7 @@ brew chafa
 brew cjson
 brew cmake
 brew cmatrix
+brew commitizen
 brew composer
 brew coreutils
 brew cryptography
@@ -60,6 +61,7 @@ brew gflags
 brew gh
 brew ghostscript
 brew giflib
+brew git-delta
 brew glib
 brew glog
 brew glow
@@ -227,6 +229,7 @@ brew protobuf
 brew pycparser
 brew pyenv
 brew python-packaging
+brew python-setuptools
 brew python@3.11
 brew python@3.12
 brew python@3.13
