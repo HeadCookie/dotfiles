@@ -1,0 +1,32 @@
+[user]
+	name = Jørgen Høhling Blakey
+	email = 53434466+HeadCookie@users.noreply.github.com
+	signingkey = D687D5B875337653
+[core]
+	editor = nvim
+	excludesfile = /Users/jorgenjensen/.gitignore
+  hooksPath = /Users/jorgenjensen/.config/git/hooks
+	autocrlf = false
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  dark = true      # or light = true, or omit for auto-detection
+  line-numbers = true
+[merge]
+  conflictstyle = zdiff3
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[maintenance]
+	auto = true
+[rerere]
+	enabled = true
+[rebase]
+	updateRefs = true
+  autoStash = true

@@ -9,3 +9,4 @@
 .config/yarn/link
 .cargo/registry
 .cargo/.* 
+.gitconfig
