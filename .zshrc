@@ -39,8 +39,13 @@ fi
 export EDITOR=nvim
 
 # Add in zsh plugins
-zinit ice proto=ssh; zinit light zsh-users/zsh-syntax-highlighting
-zinit ice proto=ssh; zinit light zsh-users/zsh-completions
+if [[ "$(uname)" != "Darwin" ]]; then
+	zinit light zsh-users/zsh-syntax-highlighting
+	zinit light zsh-users/zsh-completions
+else
+	zinit ice proto=ssh; zinit light zsh-users/zsh-syntax-highlighting
+	zinit ice proto=ssh; zinit light zsh-users/zsh-completions
+fi
 zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-autosuggestions
 
