@@ -10,3 +10,4 @@
 .cargo/registry
 .cargo/.* 
 .gitconfig
+.config/k9s/config.yaml
