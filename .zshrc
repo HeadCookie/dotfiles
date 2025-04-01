@@ -68,6 +68,7 @@ bindkey -v
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^I' fzf-tab-complete
+bindkey '^Y' autosuggest-accept
 
 # History
 HISTSIZE=5000

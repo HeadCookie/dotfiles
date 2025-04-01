@@ -17,6 +17,7 @@ brew blueutil
 brew boost
 brew brotli
 brew btop
+brew c-ares
 brew ca-certificates
 brew cairo
 brew certifi
@@ -83,6 +84,7 @@ brew httpie
 brew hugo
 brew hurl
 brew icu4c@75
+brew icu4c@76
 brew imagemagick
 brew imath
 brew istioctl
@@ -123,6 +125,7 @@ brew libgpg-error
 brew libheif
 brew libidn
 brew libidn2
+brew libimagequant
 brew libksba
 brew liblinear
 brew liblqr
@@ -132,6 +135,7 @@ brew libogg
 brew libomp
 brew libpng
 brew libpq
+brew libraqm
 brew libraw
 brew librdkafka
 brew librist
@@ -189,6 +193,7 @@ brew net-snmp
 brew nettle
 brew nmap
 brew nnn
+brew node
 brew nowplaying-cli
 brew npth
 brew nspr
@@ -218,6 +223,7 @@ brew php
 brew php-cs-fixer
 brew php@8.1
 brew php@8.3
+brew pillow
 brew pinentry
 brew pinentry-mac
 brew pixman
@@ -225,6 +231,7 @@ brew pnpm
 brew poppler
 brew postgresql@14
 brew postgresql@15
+brew presenterm
 brew protobuf
 brew pycparser
 brew pyenv
@@ -236,6 +243,7 @@ brew python@3.13
 brew rav1e
 brew readline
 brew reattach-to-user-namespace
+brew redocly-cli
 brew ripgrep
 brew rtmpdump
 brew rubberband
@@ -275,6 +283,7 @@ brew vhs
 brew wangle
 brew watch
 brew watchman
+brew weasyprint
 brew webp
 brew websocat
 brew wordnet
