@@ -108,7 +108,6 @@ brew leptonica
 brew libarchive
 brew libass
 brew libassuan
-brew libassuan@2
 brew libavif
 brew libb2
 brew libbluray
@@ -157,7 +156,6 @@ brew libvidstab
 brew libvmaf
 brew libvorbis
 brew libvpx
-brew libvterm
 brew libwebsockets
 brew libx11
 brew libxau
@@ -168,6 +166,8 @@ brew libxrender
 brew libyaml
 brew libzip
 brew little-cms2
+brew lld@19
+brew llvm@19
 brew lpeg
 brew lua
 brew luajit
@@ -183,7 +183,6 @@ brew mkcert
 brew mono
 brew mpdecimal
 brew mpg123
-brew msgpack
 brew mysql@8.0
 brew ncurses
 brew neofetch
@@ -231,6 +230,7 @@ brew postgresql@14
 brew postgresql@15
 brew presenterm
 brew protobuf
+brew protobuf@29
 brew pycparser
 brew pyenv
 brew python-packaging
@@ -292,7 +292,6 @@ brew xvid
 brew xxhash
 brew xz
 brew yarn
-brew z3
 brew zeromq
 brew zig
 brew zimg
@@ -304,7 +303,6 @@ brew zstd
 
 tap homebrew/cask
 cask aerial
-cask alacritty
 cask alfred
 cask bitwarden
 cask corretto
@@ -322,7 +320,6 @@ cask keepingyouawake
 cask keycastr
 cask maccy
 cask mockoon
-cask neovide
 cask powershell
 cask sf-symbols
 cask zulu@17
@@ -349,8 +346,9 @@ tap jesseduffield/lazygit
 tap jorgenjensen/oldversions
 
 tap koekeishiya/formulae
-brew skhd
-brew yabai
+
+tap nikitabobko/tap
+cask aerospace
 
 tap rcmdnk/file
 brew brew-file
@@ -364,4 +362,5 @@ brew pkg-config
 # App Store applications
 appstore 302584613 Amazon Kindle (7.23)
 appstore 1554411065 Focus (1.6)
+appstore 682658836 GarageBand (10.4.12)
 appstore 405399194 Kindle (1.40.3)

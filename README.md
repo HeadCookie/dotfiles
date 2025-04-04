@@ -45,17 +45,16 @@ For reference checkout [this youtube video](https://www.youtube.com/watch?v=y6XC
 
 ### Desktop
 
-- [SKHD](https://github.com/koekeishiya/skhd)
-  - Hotkey daemon i.e. let's you do custom keymaps - highly neccessary to get the most out of yabai.
 - [Sketchybar](github.com/FelixKratz/Sketchybar)
-  - Custom toolbar to replace the default in MacOS. Works nicely with Yabai. The configuration is more less copied directly from the creator's own [dotfiles](https://github.com/FelixKratz/dotfiles/tree/b098d399f45f4d6209fdfaa4324919560d4f555e)
-- [Yabai](https://github.com/koekeishiya/yabai)
+  - Custom toolbar to replace the default in MacOS.
+- [Aerospace](https://github.com/nikitabobko/AeroSpace)
+  - Tiling window manager for MacOS
 
-  - Window manager for MacOS
+  [Reference](https://github.com/forteleaf/sketkchybar-with-aerospace)
 
 ### Terminal
 
-- [alacritty](https://github.com/alacritty/alacritty)
+- [ghostty](https://github.com/ghostty-org/ghostty)
   - terminal emulator
 - [tmux](https://github.com/tmux/tmux)
   - terminal multiplexer
