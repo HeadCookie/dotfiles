@@ -17,7 +17,6 @@ brew blueutil
 brew boost
 brew brotli
 brew btop
-brew c-ares
 brew ca-certificates
 brew cairo
 brew certifi
@@ -193,7 +192,6 @@ brew net-snmp
 brew nettle
 brew nmap
 brew nnn
-brew node
 brew nowplaying-cli
 brew npth
 brew nspr
@@ -243,7 +241,6 @@ brew python@3.13
 brew rav1e
 brew readline
 brew reattach-to-user-namespace
-brew redocly-cli
 brew ripgrep
 brew rtmpdump
 brew rubberband
