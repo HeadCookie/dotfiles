@@ -59,20 +59,15 @@ on-focus-changed = ['move-mouse window-lazy-center']
 #                 In this example, 24 is a default value when there is no match.
 #                 Monitor pattern is the same as for 'workspace-to-monitor-force-assignment'.
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
-[workspace-to-monitor-force-assignment]
-# 1 = 'main'
-# 2 = 'main'
-# 3 = 'V32UE'
-# 4 = 'V32UE'
-# 5 = 'V32UE'
-# 6 = '^27W'
-# 7 = '^27W'
-# 10 = '^EPSON'
 
 [gaps]
 inner.horizontal = 0
 inner.vertical = 0
-outer.top = [{ monitor."main" = 5 }, 40]
+outer.top = [
+  { monitor."34D901" = 32 },
+  { monitor."Built-in Retina Display" = 0 },
+  32,
+]
 outer.left = 0
 outer.bottom = 0
 outer.right = 0
