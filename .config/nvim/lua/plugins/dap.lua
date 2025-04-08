@@ -72,7 +72,7 @@ return {
               },
             },
           }
-        elseif cwd == "/Volumes/projects/api-auth" then
+        elseif cwd == "/Volumes/Projects/api-auth" then
           dap.adapters.php = {
             type = "executable",
             command = "php-debug-adapter",
@@ -86,7 +86,25 @@ return {
               port = 9004,
               ideKey = "API_AUTH",
               pathMappings = {
-                ["/app/data"] = "/Volumes/projects/api-auth",
+                ["/app/data"] = "/Volumes/Projects/api-auth",
+              },
+            },
+          }
+        elseif cwd == "/Volumes/Projects/api-form" then
+          dap.adapters.php = {
+            type = "executable",
+            command = "php-debug-adapter",
+          }
+
+          dap.configurations.php = {
+            {
+              type = "php",
+              request = "launch",
+              name = "Listen for Xdebug",
+              port = 9005,
+              ideKey = "API_FORM",
+              pathMappings = {
+                ["/app/data"] = "/Volumes/Projects/api-form",
               },
             },
           }
