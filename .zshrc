@@ -146,6 +146,7 @@ export PATH=$DOTNET_ROOT:$PATH
 export GPG_TTY=$(tty)
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
+export PATH="$PATH:$HOME/go/bin/"
 
 vv() {
   # Assumes all configs exist in directories named ~/.config/nvim-*
