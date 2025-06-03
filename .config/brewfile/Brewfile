@@ -169,6 +169,7 @@ brew little-cms2
 brew lld@19
 brew llvm@19
 brew lpeg
+brew lsd
 brew lua
 brew luajit
 brew luv
@@ -322,6 +323,7 @@ cask maccy
 cask mockoon
 cask powershell
 cask sf-symbols
+cask slack
 cask zulu@17
 
 tap homebrew/services
