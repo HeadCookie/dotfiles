@@ -30,3 +30,7 @@
 [rebase]
 	updateRefs = true
   autoStash = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
