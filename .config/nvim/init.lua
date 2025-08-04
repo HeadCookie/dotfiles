@@ -98,7 +98,6 @@ vim.pack.add({
   -- Utility & Telescope-like
   { src = "https://github.com/stevearc/oil.nvim", name = "oil.nvim" },
   { src = "https://github.com/folke/snacks.nvim", name = "snacks.nvim" },
-  { src = "https://github.com/folke/lazydev.nvim", name = "lazydev.nvim" },
   { src = "https://github.com/christoomey/vim-tmux-navigator", name = "vim-tmux-navigator" },
 })
 
@@ -133,16 +132,6 @@ require("nvim-treesitter.configs").setup({
   highlight = { enable = true },
   indent = { enable = true },
 })
-
--- Snacks
--- require("snacks").setup({
---   picker = { enabled = true },
---   lazygit = { enabled = true },
---   git = { enabled = true },
---   gitbrowse = { enabled = true },
---   input = { enabled = true },
---   indent = { enabled = true },
--- })
 
 local snacks_keymaps = {
   -- General
