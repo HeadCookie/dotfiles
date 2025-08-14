@@ -1,165 +1,155 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
+# ------------------------------------------------------------------------------
+# 1. POWERLEVEL10K INSTANT PROMPT
+# ------------------------------------------------------------------------------
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# if [ -z "$TMUX" ]; then
-#   exec tmux new-session -A
-# fi
-#
-# SET directory for zinit and plugins
+# ------------------------------------------------------------------------------
+# 2. ZINIT PLUGIN MANAGER
+# ------------------------------------------------------------------------------
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# If zinit is not already install we install it
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone git@github.com:zdharma-continuum/zinit.git "$ZINIT_HOME"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" # Using https for reliability
 fi
-
-# Load/source zinit
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Add Powerlevel10k
+# ------------------------------------------------------------------------------
+# 3. EXPORTS & ENVIRONMENT
+# ------------------------------------------------------------------------------
+export EDITOR='nvim'
+export MANPAGER="nvim +Man!"
+export VISUAL="$EDITOR"
+export GPG_TTY=$(tty)
+
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="/usr/local/go/bin:$PATH"
+export PATH="$HOME/go/bin/:$PATH"
+export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+export PATH="$DOTNET_ROOT:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
+export PENNEO_DOCKER_HOST_IP=10.254.254.254
+
+# Tool-specific exports
+export PYENV_ROOT="$HOME/.pyenv"
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export DOTNET_ROOT=$HOME/.dotnet
+export TMS_CONFIG_FILE=$HOME/.config/tms/config.toml
+
+
+# ------------------------------------------------------------------------------
+# 4. PLUGINS
+# ------------------------------------------------------------------------------
+# Theme
 zinit ice depth=1; zinit light romkatv/powerlevel10k
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Mac or linux homebrew install
-if [[ "$(uname)" != "Darwin" ]]; then
-  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-else
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-  source $(brew --prefix)/etc/brew-wrap
-fi
-
-export EDITOR=nvim
-
-# Add in zsh plugins
-if [[ "$(uname)" != "Darwin" ]]; then
-	zinit light zsh-users/zsh-syntax-highlighting
-	zinit light zsh-users/zsh-completions
-else
-	zinit ice proto=ssh; zinit light zsh-users/zsh-syntax-highlighting
-	zinit ice proto=ssh; zinit light zsh-users/zsh-completions
-fi
+# Plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-autosuggestions
+zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
-# Add sippets
+# Snippets
 zinit snippet OMZP::brew
 zinit snippet OMZP::composer
 zinit snippet OMZP::git
 zinit snippet OMZP::golang
 zinit snippet OMZP::npm
 zinit snippet OMZP::nvm
+zinit snippet OMZP::node
+zinit snippet OMZP::direnv
 
-# Load completions
-autoload -U compinit && compinit
+# ------------------------------------------------------------------------------
+autoload -U compinit
+
+local zcomp_cache="${ZDOTDIR:-$HOME}/.zcompdump"
+
+if [[ -f "$zcomp_cache" ]]; then
+  local mod_time=$(stat -f %m "$zcomp_cache")
+  local now=$(date +%s)
+  if (( (now - mod_time) > 86400 )); then
+    compinit
+  else
+    compinit -C
+  fi
+else
+  compinit
+fi
+
 zinit cdreplay -q
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Key bindings
-bindkey -v
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+enable-fzf-tab
+
+# ------------------------------------------------------------------------------
+# 6. SHELL HOOKS & LAZY LOADING
+# ------------------------------------------------------------------------------
+# NVM (Lazy Loaded)
+export NVM_DIR="$HOME/.nvm"
+nvm() { unset -f nvm node npm; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"; nvm "$@"; }
+node() { nvm use --lts &>/dev/null; node "$@"; }
+npm() { nvm use --lts &>/dev/null; npm "$@"; }
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(thefuck --alias)"
+export DIRENV_LOG_FORMAT=""
+eval "$(direnv hook zsh)"
+eval "$(jenv init -)"
+
+# ------------------------------------------------------------------------------
+# 7. ALIASES & FUNCTIONS
+# ------------------------------------------------------------------------------
+alias ls='ls --color=auto -lh'
+alias lzd='lazydocker'
+alias lg='lazygit'
+alias c='clear'
+alias vim="nvim"
+alias dot="cd ~/dotfiles && nvim ."
+alias dotnet64=/usr/local/share/dotnet/x64/dotnet
+alias shrug="echo '¯\\_(ツ)_/¯' && echo '¯\\_(ツ)_/¯' | pbcopy"
+alias config='/usr/bin/git --git-dir=/Users/jorgenjensen/.cfg/ --work-tree=/Users/jorgenjensen'
+alias lgc='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
+alias dc='docker compose'
+
+vv() {
+  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
+  [[ -z $config ]] && echo "No config selected" && return
+  NVIM_APPNAME=$(basename $config) nvim "$@"
+}
+
+# ------------------------------------------------------------------------------
+# 8. KEYBINDINGS & HISTORY
+# ------------------------------------------------------------------------------
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^I' fzf-tab-complete
 bindkey '^Y' autosuggest-accept
 
-# History
 HISTSIZE=5000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
+SAVEHIST=5000
 HISTDUP=erase
-setopt appendhistory
-setopt sharehistory
-setopt hist_ignore_space
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+HISTFILE=~/.zsh_history
+setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_save_no_dups hist_ignore_dups hist_find_no_dups
 
-# Completion styling
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
+# ------------------------------------------------------------------------------
+# 9. POWERLEVEL10K CONFIG & TMUX
+# ------------------------------------------------------------------------------
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# Aliases
-alias ls='ls --color -lh'
-alias lzd='lazydocker'
-alias lg='lazygit'
-alias c='clear'
-alias dotnet64=/usr/local/share/dotnet/x64/dotnet
-alias shrug="echo '¯\\_(ツ)_/¯' && echo '¯\\_(ツ)_/¯' | pbcopy"
-alias vim="nvim"
-alias dot="cd ~/dotfiles && vim ."
-alias config='/usr/bin/git --git-dir=/Users/jorgenjensen/.cfg/ --work-tree=/Users/jorgenjensen'
-alias lgc='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
-alias dc='docker compose'
-# alias cat="bat"
-
-# Shell integrations
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-eval "$(thefuck --alias)"
-eval "$(direnv hook zsh)"
-eval "$(jenv init -)"
-
-# Manually enable-fzf-tab on Ubuntu
-enable-fzf-tab
-
-# Exports
-export CLASSPATH="</Users/jorgenjensen/repos/cs61b/library-sp24>:$CLASSPATH"
-export PATH="$HOME/bin:$PATH"
-export PATH=$PATH:/Users/jorgenjensen/Library/Python/3.9/bin
-export NVM_LAZY=1
-
-export XDG_CONFIG_HOME="$HOME/.config"
-export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
-export PATH=$PATH:/opt/homebrew/Cellar/pcre2/10.42/include
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH=$PATH:/usr/local/go/bin
-export PENNEO_DOCKER_HOST_IP=10.254.254.254
-export PATH="$HOME/.local/bin:$PATH"
-# export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk@21/include"
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
-export DOTNET_ROOT=$HOME/.dotnet
-export PATH=$DOTNET_ROOT:$PATH
-export GPG_TTY=$(tty)
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
-export PATH="$PATH:$HOME/go/bin/"
-
-vv() {
-  # Assumes all configs exist in directories named ~/.config/nvim-*
-  local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
- 
-  # If I exit fzf without selecting a config, don't open Neovim
-  [[ -z $config ]] && echo "No config selected" && return
- 
-  # Open Neovim with the selected config
-  NVIM_APPNAME=$(basename $config) nvim $@
-}
+# Auto-start tmux
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
   tmux attach-session -t default || tmux new-session -s default
 fi
-
-
