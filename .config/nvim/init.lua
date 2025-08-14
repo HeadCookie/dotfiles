@@ -93,7 +93,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-lua/plenary.nvim", name = "plenary" },
 
   -- UI & Theme
-  { src = "https://github.com/vague2k/vague.nvim.git", name = "vague.nvim.git" },
+  { src = "https://github.com/projekt0n/github-nvim-theme.git", name = "github-nvim-theme.git" },
   { src = "https://github.com/folke/which-key.nvim", name = "which-key" },
   { src = "https://github.com/nvim-tree/nvim-web-devicons", name = "nvim-web-devicons" },
   { src = "https://github.com/echasnovski/mini.icons", name = "mini.icons" },
@@ -277,6 +277,6 @@ wk.add({
 -- ----------------------------------------------------------------------------
 --  THEME & APPEARANCE
 -- ----------------------------------------------------------------------------
-require("vague").setup({ transparent = true })
-vim.cmd("colorscheme vague")
+require("github-theme").setup({ options = { transparent = true }})
+vim.cmd("colorscheme github_dark_high_contrast")
 vim.cmd("hi StatusLine guibg=NONE")
