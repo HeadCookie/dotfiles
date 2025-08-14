@@ -1,0 +1,31 @@
+excluded_dirs = [
+    "/Volumes/Projects/.Trashes",
+    "/Volumes/Projects/.fseventsd",
+    "/Volumes/Projects/.Trashes",
+    "/Volumes/Projects/.fseventsd",
+    "/Volumes/Projects/.TemporaryItems",
+    "/Volumes/Projects/.Spotlight-V100/",
+    "/Volumes/Projects/.DocumentRevisions-V100",
+    "/Volumes/Projects/.Trashes",
+    "/Volumes/Projects/.fseventsd",
+    "/Volumes/Projects/.TemporaryItems",
+    "/Volumes/Projects/.Spotlight-V100",
+    "/Volumes/Projects/.DocumentRevisions-V100",
+]
+bookmarks = ["/Users/jorgenjensen/dotfiles/.config/nvim"]
+
+[[search_dirs]]
+path = "/Volumes/Projects"
+depth = 1
+
+[[search_dirs]]
+path = "/Users/jorgenjensen/repos"
+depth = 1
+
+[[search_dirs]]
+path = "/Users/jorgenjensen/dotfiles"
+depth = 1
+
+[shortcuts]
+ctrl-j = "move_down"
+ctrl-k = "move_up"
