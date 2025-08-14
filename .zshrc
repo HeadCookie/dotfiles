@@ -11,7 +11,7 @@ fi
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME" # Using https for reliability
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
 source "${ZINIT_HOME}/zinit.zsh"
 
@@ -29,9 +29,13 @@ export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/go/bin/:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
+export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
+export PATH=$PATH:/opt/homebrew/Cellar/pcre2/10.42/include
 export PATH="$DOTNET_ROOT:$PATH"
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
+export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 export PENNEO_DOCKER_HOST_IP=10.254.254.254
 
 # Tool-specific exports
@@ -100,6 +104,9 @@ npm() { nvm use --lts &>/dev/null; npm "$@"; }
 
 # Homebrew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -f $(brew --prefix)/etc/brew-wrap ];then
+  source $(brew --prefix)/etc/brew-wrap
+fi
 
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"

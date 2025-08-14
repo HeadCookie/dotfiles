@@ -7,8 +7,10 @@ brew aom
 brew apr
 brew apr-util
 brew argon2
+brew argtable3
 brew aribb24
 brew aspell
+brew astroterm
 brew autoconf
 brew awscli
 brew bash
@@ -73,6 +75,7 @@ brew gnutls
 brew go
 brew go@1.22
 brew gpgme
+brew gpgmepp
 brew gradle
 brew grafana
 brew graphite2
@@ -83,6 +86,7 @@ brew highway
 brew httpie
 brew hugo
 brew hurl
+brew icu4c
 brew icu4c@75
 brew icu4c@76
 brew imagemagick
@@ -130,6 +134,8 @@ brew liblinear
 brew liblqr
 brew libmicrohttpd
 brew libnghttp2
+brew libnghttp3
+brew libngtcp2
 brew libogg
 brew libomp
 brew libpng
@@ -223,6 +229,7 @@ brew pillow
 brew pinentry
 brew pinentry-mac
 brew pixman
+brew pkg-config
 brew pnpm
 brew poppler
 brew postgresql@14
@@ -267,9 +274,11 @@ brew thefuck
 brew theora
 brew tidy-html5
 brew tmux
+brew tmux-sessionizer
 brew tokei
 brew tree
 brew ttyd
+brew typioca
 brew unbound
 brew unixodbc
 brew utf8proc
@@ -354,12 +363,8 @@ brew brew-file
 
 tap symfony-cli/tap
 
-# Other Homebrew packages
-brew icu4c
-brew pkg-config
-
 # App Store applications
-appstore 302584613 Amazon Kindle (7.37)
+appstore 302584613 Amazon Kindle (7.38.1)
 appstore 1554411065 Focus (1.6)
 appstore 682658836 GarageBand (10.4.12)
 appstore 405399194 Kindle (1.40.3)
