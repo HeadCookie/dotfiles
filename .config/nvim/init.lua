@@ -40,13 +40,15 @@ vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 --  KEYMAPS
 -- ----------------------------------------------------------------------------
 -- General
-vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", ":write<CR><ESC>", { desc = "Save File" })
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
+vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<ESC>:write<CR><ESC>", { desc = "Save File" })
+vim.keymap.set("n", "<Esc>", "<CMD>nohlsearch<CR>", { desc = "Clear search highlight" })
 vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
 
 -- LSP & Diagnostics
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format buffer" })
-vim.keymap.set("n", "<leader>xx", vim.diagnostic.setloclist, { desc = "Open diagnostic list" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Action" })
+vim.keymap.set("n", "<leader>xx", ":Trouble diagnostics toggle focus=false filter.buf=0<CR>", { desc = "Open diagnostic list" })
 
 -- Plugins
 vim.keymap.set("n", "<leader>pu", vim.pack.update, { desc = "Update plugins" })
@@ -88,6 +90,7 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", name = "nvim-treesitter" },
   { src = "https://github.com/mason-org/mason.nvim", name = "manson.nvim" },
   { src = "https://github.com/mason-org/mason-lspconfig.nvim", name = "mason-lspconfig.nvim" },
+  { src = "https://github.com/nvim-lua/plenary.nvim", name = "plenary" },
 
   -- UI & Theme
   { src = "https://github.com/vague2k/vague.nvim.git", name = "vague.nvim.git" },
@@ -95,10 +98,14 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons", name = "nvim-web-devicons" },
   { src = "https://github.com/echasnovski/mini.icons", name = "mini.icons" },
 
-  -- Utility & Telescope-like
+  -- Utility
   { src = "https://github.com/stevearc/oil.nvim", name = "oil.nvim" },
   { src = "https://github.com/folke/snacks.nvim", name = "snacks.nvim" },
+  { src = "https://github.com/lewis6991/gitsigns.nvim", name = "gitsigns" },
+  { src = "https://github.com/folke/trouble.nvim", name = "trouble" },
   { src = "https://github.com/christoomey/vim-tmux-navigator", name = "vim-tmux-navigator" },
+  { src = "https://github.com/folke/flash.nvim", name = "flash" },
+  { src = "https://github.com/ThePrimeagen/harpoon", name = "harpoon", version = "harpoon2" },
 })
 
 -- ----------------------------------------------------------------------------
@@ -108,9 +115,9 @@ vim.pack.add({
 -- Mason
 require("mason").setup()
 require("mason-lspconfig").setup()
+vim.keymap.set("n", "<leader>cm", ":Mason<CR>", { desc = "Mason" })
 
 -- LSP
-vim.cmd("set completeopt+=noselect")
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -119,6 +126,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
   end,
 })
+vim.cmd("set completeopt+=noselect")
 
 -- Treesitter
 require("nvim-treesitter.configs").setup({
@@ -182,9 +190,51 @@ local snacks_keymaps = {
   { "n", "<leader>sS", function() Snacks.picker.lsp_workspace_symbols() end, { desc = "Workspace Symbols" } },
   { "n", "<leader>sd", function() Snacks.picker.diagnostics() end, { desc = "Workspace Diagnostics" } },
 }
+
 for _, map in ipairs(snacks_keymaps) do
   vim.keymap.set(map[1], map[2], map[3], map[4])
 end
+
+-- Flash
+require("flash").setup({
+  label = {
+    rainbow = {
+      enabled = true,
+      shade = 2
+    }
+  }
+})
+
+local flash_keymaps = {
+  { {"n", "x", "o"}, "s", function() require("flash").jump() end, { desc = "Flash" }},
+  { {"n", "x", "o"}, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter" }},
+}
+
+for _, map in ipairs(flash_keymaps) do
+  vim.keymap.set(map[1], map[2], map[3], map[4])
+end
+
+-- Trouble
+require("trouble").setup({
+  cmd = "Trouble"
+})
+
+-- Harpoon
+local harpoon = require("harpoon")
+
+harpoon:setup()
+
+vim.keymap.set("n", "<leader>H", function() harpoon:list():add() end)
+vim.keymap.set("n", "<leader>h", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<leader>1", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<leader>2", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<leader>3", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<leader>4", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 
 -- Oil (File Explorer)
 require("oil").setup({
@@ -221,7 +271,7 @@ wk.add({
   { "<leader>g", group = "[G]it" },
   { "<leader>s", group = "[S]earch" },
   { "<leader>f", group = "[F]ind" },
-  { "<leader>p", group = "[P]ack" },
+  { "<leader>p", group = "[P]lugin" },
 })
 
 -- ----------------------------------------------------------------------------
