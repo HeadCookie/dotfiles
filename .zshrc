@@ -142,7 +142,7 @@ vv() {
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^I' fzf-tab-complete
-bindkey '^Y' autosuggest-accept
+bindkey -M viins '^Y' autosuggest-accept
 
 HISTSIZE=5000
 SAVEHIST=5000
