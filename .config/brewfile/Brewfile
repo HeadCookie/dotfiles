@@ -20,10 +20,10 @@ brew bob
 brew boost
 brew brotli
 brew btop
+brew c-ares
 brew ca-certificates
 brew cairo
 brew certifi
-brew cffi
 brew chafa
 brew cjson
 brew cmake
@@ -31,7 +31,6 @@ brew cmatrix
 brew commitizen
 brew composer
 brew coreutils
-brew cryptography
 brew curl
 brew dav1d
 brew direnv
@@ -59,6 +58,7 @@ brew fribidi
 brew fzf
 brew gd
 brew gdk-pixbuf
+brew gemini-cli
 brew gettext
 brew gflags
 brew gh
@@ -196,6 +196,7 @@ brew net-snmp
 brew nettle
 brew nmap
 brew nnn
+brew node
 brew nowplaying-cli
 brew npth
 brew nspr
@@ -224,7 +225,6 @@ brew pdftk-java
 brew php
 brew php-cs-fixer
 brew php@8.1
-brew php@8.3
 brew pillow
 brew pinentry
 brew pinentry-mac
@@ -237,7 +237,6 @@ brew postgresql@15
 brew presenterm
 brew protobuf
 brew protobuf@29
-brew pycparser
 brew pyenv
 brew python-packaging
 brew python-setuptools
@@ -254,6 +253,7 @@ brew ruby
 brew screenresolution
 brew sdl2
 brew shared-mime-info
+brew simdjson
 brew six
 brew slides
 brew snappy
@@ -341,7 +341,6 @@ tap derailed/k9s
 
 tap felixkratz/formulae
 brew borders
-brew sketchybar
 
 tap int128/kubelogin
 
