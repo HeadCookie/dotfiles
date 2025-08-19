@@ -11,3 +11,4 @@
 .cargo/.* 
 .gitconfig
 .config/k9s/config.yaml
+.config/configstore/update-notifier-@google
