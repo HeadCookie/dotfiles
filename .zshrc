@@ -22,6 +22,7 @@ export EDITOR='nvim'
 export MANPAGER="nvim +Man!"
 export VISUAL="$EDITOR"
 export GPG_TTY=$(tty)
+export TERM=xterm-256color
 
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -56,6 +57,10 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-autosuggestions
+function zvm_after_init() {
+  zvm_bindkey viins '^Y' autosuggest-accept
+  ZVM_KEYTIMEOUT=0
+}
 zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 # Snippets
@@ -142,7 +147,7 @@ vv() {
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 bindkey '^I' fzf-tab-complete
-bindkey -M viins '^Y' autosuggest-accept
+KEYTIMEOUT=1
 
 HISTSIZE=5000
 SAVEHIST=5000
@@ -158,5 +163,5 @@ setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_sa
 
 # Auto-start tmux
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach-session -t default || tmux new-session -s default
+  tmux attach-session || tmux new-session -s dotfiles
 fi
