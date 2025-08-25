@@ -274,7 +274,6 @@ brew thefuck
 brew theora
 brew tidy-html5
 brew tmux
-brew tmux-sessionizer
 brew tokei
 brew tree
 brew ttyd
@@ -299,6 +298,7 @@ brew xvid
 brew xxhash
 brew xz
 brew yarn
+brew yq
 brew zeromq
 brew zig
 brew zimg
