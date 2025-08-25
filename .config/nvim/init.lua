@@ -99,9 +99,6 @@ vim.pack.add({
   { src = "https://github.com/nvim-tree/nvim-web-devicons",            name = "nvim-web-devicons" },
   { src = "https://github.com/echasnovski/mini.icons",                 name = "mini.icons" },
   { src = "https://github.com/nvim-lualine/lualine.nvim",              name = "lualine" },
-  { src = "https://github.com/MunifTanjim/nui.nvim",                   name = "nui" },
-  { src = "https://github.com/rcarriga/nvim-notify",                   name = "nvim-notify" },
-  { src = "https://github.com/folke/noice.nvim",                       name = "noice" },
   { src = "https://github.com/christopher-francisco/tmux-status.nvim", name = "tmux-status" },
 
   -- Utility
@@ -113,6 +110,7 @@ vim.pack.add({
   { src = "https://github.com/folke/flash.nvim",                       name = "flash" },
   { src = "https://github.com/ThePrimeagen/harpoon",                   name = "harpoon",              version = "harpoon2" },
   { src = "https://github.com/echasnovski/mini.pairs",                 name = "mini.pairs" },
+  { src = "https://github.com/towolf/vim-helm", name = "vim-helm" },
 })
 
 -- ----------------------------------------------------------------------------
@@ -138,7 +136,7 @@ vim.cmd("set completeopt+=noselect")
 -- Treesitter
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
-    "bash", "c", "diff", "git_config", "gitattributes", "gitignore", "go",
+    "bash", "c", "diff", "git_config", "gitattributes", "gitignore", "go", "helm",
     "html", "java", "javascript", "jsdoc", "json", "jsonc", "kotlin", "lua",
     "luadoc", "luap", "markdown", "markdown_inline", "php", "phpdoc", "python",
     "query", "regex", "sql", "terraform", "toml", "tsx", "twig", "typescript",
@@ -309,20 +307,7 @@ require("lualine").setup({
     lualine_z = { 'location' }
   },
 })
-require("tmux-status").setup({})
-require("notify").setup({
-  background_colour = "#000000",
-})
 
-require("noice").setup({
-  lsp = {
-    override = {
-      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-      ["vim.lsp.util.stylize_markdown"] = true,
-      ["cmp.entry.get_documentation"] = false,
-    },
-  },
-})
 require("github-theme").setup({ options = { transparent = true } })
 vim.cmd("colorscheme github_dark_high_contrast")
 vim.cmd("hi StatusLine guibg=NONE")
