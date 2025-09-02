@@ -308,7 +308,7 @@ local snacks_keymaps = {
     {"n", '<leader>s"', function() Snacks.picker.registers() end, { desc = "Search Registers" },},
     {"n", "<leader>s/", function() Snacks.picker.search_history() end, { desc = "Search History" },},
     -- LSP
-    {"n", "/gd", function() Snacks.picker.lsp_definitions() end, {desc = "Goto Definition"},},
+    {"n", "gd", function() Snacks.picker.lsp_definitions() end, {desc = "Goto Definition"},},
     {"n", "gD", function() Snacks.picker.lsp_declarations() end, { desc = "Goto Declaration" },},
     {"n", "gr", function() Snacks.picker.lsp_references() end, { desc = "References", nowait = true },},
     {"n", "gI", function() Snacks.picker.lsp_implementations() end, { desc = "Goto Implementation" },},
