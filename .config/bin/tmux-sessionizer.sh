@@ -1,31 +1,35 @@
 #!/usr/bin/env bash
+PROJECTS_DIR="/Volumes/Projects"
 
-if [[ $# -eq 1 ]]; then
-  selected=$1
-else
-  selected=$(
-    fd . '/Volumes/Projects' -d 1 -t d | sed "s|^/Volumes/Projects/||" | fzf --tmux center,50%
-  )
+projects=$(fd . "$PROJECTS_DIR" -d 1 -t d | sed "s|^$PROJECTS_DIR/||" | sed 's:/*$::')
 
-  if [[ -z $selected ]]; then
-    exit 0
-  fi
+sessions=$(tmux list-sessions -F '#S' 2>/dev/null || true)
 
-  selected="/Volumes/Projects/$selected"
+selected=$(echo -e "${projects}\n${sessions}" | sort -u | fzf --tmux center,50%)
 
+if [[ -z $selected ]]; then
+  exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
+selected_name=$(echo "$selected" | tr . _)
+
 tmux_running=$(pgrep tmux)
 
 if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-  tmux new-session -s "$selected_name" -c "$selected"
+  if [[ -d "$PROJECTS_DIR/$selected" ]]; then
+    tmux new-session -s "$selected_name" -c "$PROJECTS_DIR/$selected"
+  else
+    tmux new-session -s "$selected_name"
+  fi
   exit 0
 fi
 
 if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-  tmux new-session -ds "$selected_name" -c "$selected"
-  tmux select-window -t "$selected_name":1
+  tmux new-session -ds "$selected_name" -c "$PROJECTS_DIR/$selected"
 fi
 
-tmux switch-client -t "$selected_name"
+if [[ -n "$TMUX" ]]; then
+  tmux switch-client -t "$selected_name"
+else
+  tmux attach-session -t "$selected_name"
+fi
