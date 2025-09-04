@@ -120,6 +120,7 @@ vim.pack.add({
     { src = "https://github.com/towolf/vim-helm", name = "vim-helm" },
     { src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = vim.version.range("^1") },
     { src = "https://github.com/stevearc/conform.nvim", name = "conform.nvim" },
+    { src = "https://github.com/davidmh/mdx.nvim", name = "mdx.nvim" },
 })
 
 -- ----------------------------------------------------------------------------
@@ -265,6 +266,8 @@ require("nvim-treesitter.configs").setup({
     highlight = { enable = true },
     indent = { enable = true },
 })
+
+require("mdx").setup({ config = true })
 
 -- stylua: ignore start
 -- Snacks
