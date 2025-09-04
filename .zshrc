@@ -24,6 +24,7 @@ export VISUAL="$EDITOR"
 export GPG_TTY=$(tty)
 export TERM=xterm-256color
 
+export PATH="$HOME/.jenv/bin:$PATH"
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
