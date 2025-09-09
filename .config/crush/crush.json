@@ -1,0 +1,17 @@
+{
+  "providers": {
+    "lmstudio": {
+      "name": "LM Studio",
+      "base_url": "http://localhost:1234/v1/",
+      "type": "openai",
+      "models": [
+        {
+          "name": "Qwen 3 30B",
+          "id": "qwen/qwen3-coder-30b",
+          "context_window": 256000,
+          "default_max_tokens": 20000
+        }
+      ]
+    }
+  }
+}

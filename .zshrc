@@ -45,6 +45,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export DOTNET_ROOT=$HOME/.dotnet
 export TMS_CONFIG_FILE=$HOME/.config/tms/config.toml
+export PATH="$PATH:/Users/jorgenjensen/.lmstudio/bin"
 
 
 # ------------------------------------------------------------------------------
@@ -166,3 +167,5 @@ setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_sa
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
   tmux attach-session || tmux new-session -s dotfiles
 fi
+
+
