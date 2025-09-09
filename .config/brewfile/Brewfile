@@ -6,6 +6,7 @@ brew abseil
 brew aom
 brew apr
 brew apr-util
+brew argocd
 brew argon2
 brew argtable3
 brew aribb24
@@ -108,6 +109,7 @@ brew krb5
 brew kubectx
 brew kubelogin
 brew kubernetes-cli
+brew kustomize
 brew lame
 brew lazydocker
 brew lazygit
@@ -341,8 +343,14 @@ cask zulu@17
 
 tap homebrew/services
 
+tap charmbracelet/tap
+brew crush
+
 tap common-fate/granted
 brew granted
+
+tap darksworm/tap
+cask argonaut
 
 tap derailed/k9s
 
@@ -366,6 +374,9 @@ cask aerospace
 
 tap rcmdnk/file
 brew brew-file
+
+tap sst/tap
+brew opencode
 
 tap symfony-cli/tap
 
