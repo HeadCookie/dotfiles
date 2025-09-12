@@ -131,7 +131,6 @@ alias ls='ls --color=auto -lh'
 alias lzd='lazydocker'
 alias lg='lazygit'
 alias c='clear'
-alias vim="nvim"
 alias dot="cd ~/dotfiles && nvim ."
 alias dotnet64=/usr/local/share/dotnet/x64/dotnet
 alias shrug="echo '¯\\_(ツ)_/¯' && echo '¯\\_(ツ)_/¯' | pbcopy"
@@ -143,6 +142,15 @@ vv() {
   local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
   [[ -z $config ]] && echo "No config selected" && return
   NVIM_APPNAME=$(basename $config) nvim "$@"
+}
+
+# Fixing the root cause has failed. Let's patch the fat finger issue instead
+vim() {
+  if [[ "$1" == "," && "$#" -eq 1 ]]; then
+    command nvim .
+  else
+    command nvim "$@"
+  fi
 }
 
 # ------------------------------------------------------------------------------
