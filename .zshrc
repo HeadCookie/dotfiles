@@ -45,7 +45,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export DOTNET_ROOT=$HOME/.dotnet
 export TMS_CONFIG_FILE=$HOME/.config/tms/config.toml
-export PATH="$PATH:/Users/jorgenjensen/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
 
 # ------------------------------------------------------------------------------
@@ -134,7 +134,7 @@ alias c='clear'
 alias dot="cd ~/dotfiles && nvim ."
 alias dotnet64=/usr/local/share/dotnet/x64/dotnet
 alias shrug="echo '¯\\_(ツ)_/¯' && echo '¯\\_(ツ)_/¯' | pbcopy"
-alias config='/usr/bin/git --git-dir=/Users/jorgenjensen/.cfg/ --work-tree=/Users/jorgenjensen'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias lgc='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
 alias dc='docker compose'
 
