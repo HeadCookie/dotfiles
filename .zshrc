@@ -85,7 +85,7 @@ autoload -U compinit
 local zcomp_cache="${ZDOTDIR:-$HOME}/.zcompdump"
 
 if [[ -f "$zcomp_cache" ]]; then
-  local mod_time=$(stat -f %m "$zcomp_cache")
+  local mod_time=$(stat -f --format=%m "$zcomp_cache")
   local now=$(date +%s)
   if (( (now - mod_time) > 86400 )); then
     compinit
