@@ -25,19 +25,21 @@ export GPG_TTY=$(tty)
 export TERM=xterm-256color
 
 export PATH="$HOME/.jenv/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  export PATH="/opt/homebrew/bin:$PATH"
+  export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
+  export PATH=$PATH:/opt/homebrew/Cellar/pcre2/10.42/include
+  export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+  export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
+  export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+  export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
+fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="$HOME/go/bin/:$PATH"
 export PATH="$HOME/Library/Python/3.9/bin:$PATH"
-export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
-export PATH=$PATH:/opt/homebrew/Cellar/pcre2/10.42/include
 export PATH="$DOTNET_ROOT:$PATH"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
-export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
-export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
 export PENNEO_DOCKER_HOST_IP=10.254.254.254
 
 # Tool-specific exports
@@ -66,7 +68,9 @@ function zvm_after_init() {
 zinit ice depth=1; zinit light jeffreytse/zsh-vi-mode
 
 # Snippets
-zinit snippet OMZP::brew
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  zinit snippet OMZP::brew
+fi
 zinit snippet OMZP::composer
 zinit snippet OMZP::git
 zinit snippet OMZP::golang
@@ -111,10 +115,11 @@ nvm() { unset -f nvm node npm; [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh";
 node() { nvm use --lts &>/dev/null; node "$@"; }
 npm() { nvm use --lts &>/dev/null; npm "$@"; }
 
-# Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
-if [ -f $(brew --prefix)/etc/brew-wrap ];then
-  source $(brew --prefix)/etc/brew-wrap
+if [[ "$(uname -s)" == "Darwin" ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  if [ -f $(brew --prefix)/etc/brew-wrap ];then
+    source $(brew --prefix)/etc/brew-wrap
+  fi
 fi
 
 eval "$(fzf --zsh)"
