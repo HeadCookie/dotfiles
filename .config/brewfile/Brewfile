@@ -210,6 +210,7 @@ brew nuget
 brew oh-my-posh
 brew oniguruma
 brew openapi-generator
+brew opencode
 brew opencore-amr
 brew openexr
 brew openjdk
@@ -376,7 +377,6 @@ tap rcmdnk/file
 brew brew-file
 
 tap sst/tap
-brew opencode
 
 tap symfony-cli/tap
 
