@@ -1,4 +1,14 @@
 # ------------------------------------------------------------------------------
+# 0. TMUX AUTO-START
+# ------------------------------------------------------------------------------
+if command -v tmux &>/dev/null && [[ -z "$TMUX" && -z "$SSH_TTY" && -t 0 ]]; then
+  if [[ "$(uname -s)" == "Darwin" ]]; then
+    tmux attach-session || tmux new-session -s dotfiles
+  else
+    exec tmux new-session -A -s main
+  fi
+fi
+# ------------------------------------------------------------------------------
 # 1. POWERLEVEL10K INSTANT PROMPT
 # ------------------------------------------------------------------------------
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
