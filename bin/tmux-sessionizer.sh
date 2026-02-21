@@ -1,5 +1,13 @@
 #!/usr/bin/env bash
-PROJECTS_DIR="/Volumes/Projects"
+EXTERNAL_DIR="/Volumes/Projects"
+FALLBACK_DIR="$HOME/Projects"
+
+if [[ -d "$EXTERNAL_DIR" ]]; then
+    PROJECTS_DIR="$EXTERNAL_DIR"
+else
+    PROJECTS_DIR="$FALLBACK_DIR"
+    mkdir -p "$PROJECTS_DIR"
+fi
 
 projects=$(fd . "$PROJECTS_DIR" -d 1 -t d | sed "s|^$PROJECTS_DIR/||" | sed 's:/*$::')
 
