@@ -292,47 +292,32 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- Treesitter
-require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-        "bash",
-        "c",
-        "diff",
-        "git_config",
-        "gitattributes",
-        "gitignore",
-        "go",
-        "helm",
-        "html",
-        "java",
-        "javascript",
-        "jsdoc",
-        "json",
-        "jsonc",
-        "kotlin",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "php",
-        "phpdoc",
-        "python",
-        "query",
-        "regex",
-        "sql",
-        "terraform",
-        "toml",
-        "tsx",
-        "twig",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-    },
-    highlight = { enable = true },
-    indent = { enable = true },
+local ts = require("nvim-treesitter")
+
+ts.setup({
 })
+
+ts.install({
+    "bash", "c", "diff", "git_config", "gitattributes", "gitignore",
+    "go", "helm", "html", "java", "javascript", "jsdoc", "json",
+    "jsonc", "kotlin", "lua", "luadoc", "luap", "markdown",
+    "markdown_inline", "php", "phpdoc", "python", "query", "regex",
+    "sql", "terraform", "toml", "tsx", "twig", "typescript",
+    "vim", "vimdoc", "xml", "yaml",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(args)
+        local lang = vim.treesitter.language.get_lang(vim.bo[args.buf].filetype)
+        if lang then
+            -- Enable Highlighting
+            pcall(vim.treesitter.start, args.buf, lang)
+            -- Enable Indentation (Note: This is still considered experimental)
+            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        end
+    end,
+})
+
 
 -- stylua: ignore start
 -- Snacks
