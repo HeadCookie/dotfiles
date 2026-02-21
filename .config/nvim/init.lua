@@ -2,6 +2,7 @@
 --  GLOBALS
 -- ----------------------------------------------------------------------------
 local vim = vim
+local format_hunks
 vim.g.have_nerd_font = true
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -46,9 +47,10 @@ vim.keymap.set("n", "<Esc>", "<CMD>nohlsearch<CR>", { desc = "Clear search highl
 vim.keymap.set("n", "<leader>q", ":quit<CR>", { desc = "Quit" })
 
 -- LSP & Diagnostics
+vim.keymap.set("n", "<leader>cf", function() format_hunks() end, { desc = "Format hunks" })
 vim.keymap.set(
     "n",
-    "<leader>cf",
+    "<leader>cF",
     function() require("conform").format({ async = true, lsp_format = "fallback" }) end,
     { desc = "Format buffer" }
 )
@@ -120,12 +122,32 @@ vim.pack.add({
     { src = "https://github.com/towolf/vim-helm", name = "vim-helm" },
     { src = "https://github.com/saghen/blink.cmp", name = "blink.cmp", version = vim.version.range("^1") },
     { src = "https://github.com/stevearc/conform.nvim", name = "conform.nvim" },
-    { src = "https://github.com/davidmh/mdx.nvim", name = "mdx.nvim" },
+    -- { src = "https://github.com/ThePrimeagen/99", name = "99.nvim" },
+
+    { src = "https://github.com/coder/claudecode.nvim", name = "claudecode.nvim" },
 })
 
 -- ----------------------------------------------------------------------------
 --  PLUGIN CONFIGURATION
 -- ----------------------------------------------------------------------------
+require("claudecode").setup({})
+
+vim.keymap.set("n", "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Toggle Claude" })
+vim.keymap.set("n", "<leader>af", "<cmd>ClaudeCodeFocus<cr>", { desc = "Focus Claude" })
+vim.keymap.set("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Resume Claude" })
+vim.keymap.set("n", "<leader>aC", "<cmd>ClaudeCode --continue<cr>", { desc = "Continue Claude" })
+vim.keymap.set("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Select Claude model" })
+vim.keymap.set("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Add current buffer" })
+vim.keymap.set("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Send to Claude" })
+vim.keymap.set("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Accept diff" })
+vim.keymap.set("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Deny diff" })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+    callback = function()
+        vim.keymap.set("n", "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>", { buffer = true, desc = "Add file" })
+    end,
+})
 
 -- Mason
 require("mason").setup()
@@ -194,6 +216,39 @@ require("mini.surround").setup({
 })
 
 -- Formatting
+format_hunks = function(callback)
+    local hunks = require("gitsigns").get_hunks()
+    if not hunks or #hunks == 0 then
+        if callback then callback() end
+        return
+    end
+
+    local format = require("conform").format
+    local remaining = {}
+    for _, hunk in ipairs(hunks) do
+        if hunk.type ~= "delete" then table.insert(remaining, hunk) end
+    end
+
+    local function format_next()
+        if #remaining == 0 then
+            if callback then callback() end
+            return
+        end
+        local hunk = table.remove(remaining, 1)
+        local start = hunk.added.start
+        local last = start + hunk.added.count
+        local last_line = vim.api.nvim_buf_get_lines(0, last - 2, last - 1, true)[1] or ""
+        format({
+            async = true,
+            lsp_format = "fallback",
+            timeout_ms = 500,
+            range = { start = { start, 0 }, ["end"] = { last - 1, last_line:len() } },
+        }, function() vim.defer_fn(format_next, 1) end)
+    end
+
+    format_next()
+end
+
 require("conform").setup({
     formatters_by_ft = {
         lua = { "stylua" },
@@ -206,22 +261,34 @@ require("conform").setup({
         json = { "prettier" },
         php = { "php-cs-fixer" },
     },
-    format_on_save = {
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 500,
-    },
+    format_on_save = function(bufnr)
+        if vim.b[bufnr].disable_autoformat then return end
+        return { lsp_format = "fallback", timeout_ms = 500 }
+    end,
     formatters = {
         ["php-cs-fixer"] = {
             command = "php-cs-fixer",
             args = {
                 "fix",
+                "--no-interaction",
+                "--using-cache=no",
                 "--rules=@Symfony",
                 "$FILENAME",
             },
             stdin = false,
         },
     },
+})
+
+-- PHP: disable autoformat, use hunk-based formatting on save
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "php", "kt" },
+    callback = function()
+        vim.b.disable_autoformat = true
+        vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", function()
+            format_hunks(function() vim.cmd("w") end)
+        end, { buffer = true, desc = "Format hunks and save" })
+    end,
 })
 
 -- Treesitter
@@ -266,8 +333,6 @@ require("nvim-treesitter.configs").setup({
     highlight = { enable = true },
     indent = { enable = true },
 })
-
-require("mdx").setup({ config = true })
 
 -- stylua: ignore start
 -- Snacks
@@ -325,6 +390,19 @@ local snacks_keymaps = {
 for _, map in ipairs(snacks_keymaps) do
     vim.keymap.set(map[1], map[2], map[3], map[4])
 end
+
+require("snacks").setup({
+    image = {},
+    picker = {
+        formatters = {
+            file = {
+                filename_first = true,
+            },
+        },
+    },
+    indent = {},
+    terminal = {},
+})
 
 -- Flash
 require("flash").setup({

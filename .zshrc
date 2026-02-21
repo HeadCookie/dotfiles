@@ -79,6 +79,10 @@ zinit snippet OMZP::nvm
 zinit snippet OMZP::node
 zinit snippet OMZP::direnv
 
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
 # ------------------------------------------------------------------------------
 autoload -U compinit
 

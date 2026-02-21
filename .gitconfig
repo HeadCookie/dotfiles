@@ -4,7 +4,7 @@
 	signingkey = C1129C97527B4F3F
 [core]
 	editor = nvim
-	excludesfile = /Users/jorgenjensen/.gitignore
+	excludesFile = ~/.config/git/.gitignore
   hooksPath = /Users/jorgenjensen/.config/git/hooks
 	autocrlf = false
   ; pager = delta
