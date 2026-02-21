@@ -18,3 +18,5 @@
 .config/profanity
 .config/zed
 .config/cagent/.cagent_first_run
+/.gitconfig.local
+/.config/nvim/nvim-pack-lock.json

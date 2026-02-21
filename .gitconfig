@@ -1,7 +1,6 @@
 [user]
 	name = Jørgen Høhling Blakey
 	email = 53434466+HeadCookie@users.noreply.github.com
-	signingkey = C1129C97527B4F3F
 [core]
 	editor = nvim
 	excludesFile = ~/.config/git/.gitignore
@@ -34,3 +33,5 @@
 	defaultBranch = main
 [pull]
 	rebase = true
+[include]
+  path = .gitconfig.local
