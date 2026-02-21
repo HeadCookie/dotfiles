@@ -125,6 +125,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   if [ -f $(brew --prefix)/etc/brew-wrap ];then
     source $(brew --prefix)/etc/brew-wrap
   fi
+  eval "$(jenv init -)"
 fi
 
 eval "$(fzf --zsh)"
@@ -132,7 +133,6 @@ eval "$(zoxide init --cmd cd zsh)"
 eval "$(thefuck --alias)"
 export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook zsh)"
-eval "$(jenv init -)"
 
 # ------------------------------------------------------------------------------
 # 7. ALIASES & FUNCTIONS
