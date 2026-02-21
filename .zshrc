@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 if command -v tmux &>/dev/null && [[ -z "$TMUX" && -z "$SSH_TTY" && -t 0 ]]; then
   if [[ "$(uname -s)" == "Darwin" ]]; then
-    tmux attach-session || tmux new-session -s dotfiles
+    tmux attach-session || tmux new-session -s main
   else
     exec tmux new-session -A -s main
   fi
