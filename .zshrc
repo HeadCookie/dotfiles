@@ -94,6 +94,7 @@ zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
 # ------------------------------------------------------------------------------
+fpath=($HOME/.docker/completions $fpath)
 autoload -U compinit
 
 local zcomp_cache="${ZDOTDIR:-$HOME}/.zcompdump"
@@ -197,5 +198,3 @@ setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_sa
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
   tmux attach-session || tmux new-session -s dotfiles
 fi
-
-
