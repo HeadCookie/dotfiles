@@ -22,7 +22,7 @@ after-startup-command = [
 exec-on-workspace-change = [
   "/bin/bash",
   "-c",
-  "aerospace-scratchpad hook pull-window $AEROSPACE_PREV_WORKSPACE $AEROSPACE_FOCUSED_WORKSPACE",
+  # "aerospace-scratchpad hook pull-window $AEROSPACE_PREV_WORKSPACE $AEROSPACE_FOCUSED_WORKSPACE",
 ]
 
 # Start AeroSpace at login
@@ -164,9 +164,9 @@ alt-shift-semicolon = 'mode service'
 
 # Scrathcpad
 # alt-ctrl-1 = "exec-and-forget aerospace-scratchpad show Slack"
-alt-ctrl-2 = "exec-and-forget aerospace-scratchpad show Claude"
-alt-ctrl-3 = "exec-and-forget aerospace-scratchpad show Linear"
-alt-ctrl-4 = "exec-and-forget aerospace-scratchpad show DataGrip"
+# alt-ctrl-2 = "exec-and-forget aerospace-scratchpad show Claude"
+# alt-ctrl-3 = "exec-and-forget aerospace-scratchpad show Linear"
+# alt-ctrl-4 = "exec-and-forget aerospace-scratchpad show DataGrip"
 
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
