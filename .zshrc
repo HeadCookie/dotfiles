@@ -33,9 +33,12 @@ export MANPAGER="nvim +Man!"
 export VISUAL="$EDITOR"
 export GPG_TTY=$(tty)
 export TERM=xterm-256color
+export XDG_CONFIG_HOME="$HOME/.config"
 
+# PATH
 export PATH="$HOME/.jenv/bin:$PATH"
 if [[ "$(uname -s)" == "Darwin" ]]; then
+  export HOMEBREW_NO_AUTO_UPDATE=1
   export PATH="/opt/homebrew/bin:$PATH"
   export PATH="/opt/homebrew/opt/mysql@8.0/bin:$PATH"
   export PATH=$PATH:/opt/homebrew/Cellar/pcre2/10.42/include
@@ -43,6 +46,7 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   export PATH="$PATH:/opt/homebrew/lib/ruby/gems/3.3.0/bin"
   export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
   export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
+  export LIMA_HOME="$HOME/.config/colima/_lima"
 fi
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
@@ -158,6 +162,8 @@ alias shrug="echo '¯\\_(ツ)_/¯' && echo '¯\\_(ツ)_/¯' | pbcopy"
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias lgc='lazygit --git-dir=$HOME/.cfg --work-tree=$HOME'
 alias dc='docker compose'
+alias v='vim'
+alias k='kubectl'
 
 vv() {
   local config=$(fd --max-depth 1 --glob 'nvim*' ~/.config | fzf --prompt="Neovim Configs > " --height=~50% --layout=reverse --border --exit-0)
@@ -196,5 +202,5 @@ setopt appendhistory sharehistory hist_ignore_space hist_ignore_all_dups hist_sa
 
 # Auto-start tmux
 if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then
-  tmux attach-session || tmux new-session -s dotfiles
+  tmux attach-session || tmux new-session -s main
 fi
